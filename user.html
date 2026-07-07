@@ -54,7 +54,7 @@
     <i class="fa-solid fa-bars"></i>
   </button>
   <div class="topbar-breadcrumb">
-    STACKLY <span class="sep">/</span>
+     <span class="sep">/</span>
     <span id="topbarPageName">Home</span>
   </div>
   <div class="topbar-live">
@@ -964,35 +964,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   /* ticker */
   renderTicker();
-
-  
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.querySelectorAll("button").forEach(button => {
-
-    button.addEventListener("click", function (e) {
-
-      // Skip buttons inside links
-      if (this.closest("a")) return;
-
-      // Skip buttons with existing redirect class
-      if (this.classList.contains("no-404")) return;
-
-      // Wait for showToast to appear, then redirect
-      setTimeout(() => {
-        window.location.href = "./404.html";
-      }, 2000);
-
-    });
-
-  });
-
-});
+/* ═══════════ CURRENT USER ═══════════ */
 
 const email = localStorage.getItem("userEmail") || "Guest";
-document.getElementById("emailuser").textContent = email; 
+document.getElementById("emailuser").textContent = email;
 </script>
 </body>
 </html>

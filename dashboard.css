@@ -83,7 +83,7 @@
     .topbar-hamburger:hover{color:var(--cyan);}
 
     /* Page breadcrumb */
-    .topbar-breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;color:var(--text-3);letter-spacing:.06em;}
+    .topbar-breadcrumb{display:none;align-items:center;gap:8px;font-family:var(--mono);font-size:.7rem;color:var(--text-3);letter-spacing:.06em;}
     .topbar-breadcrumb span{color:var(--text-2);}
     .topbar-breadcrumb .sep{opacity:.4;}
 
@@ -105,7 +105,7 @@
     .topbar-avatar{
       width:36px;height:36px;border-radius:50%;
       background:var(--cyan-glow);border:1.5px solid rgba(255,106,43,.35);
-      display:flex;align-items:center;justify-content:center;
+      display:none;align-items:center;justify-content:center;
       font-family:var(--mono);font-size:.72rem;color:var(--cyan);font-weight:700;
       flex-shrink:0;cursor:pointer;transition:border-color .2s;
     }
@@ -483,7 +483,6 @@
       .form-2col{grid-template-columns:1fr;}
       .warehouses-grid,.integrations-grid,.reports-grid{grid-template-columns:1fr;}
       .analytics-kpi-row{grid-template-columns:1fr;}
-      .topbar-user-info{display:none;}
       .carrier-stat-row{justify-content:space-between;gap:8px;}
     }
     @media(max-width:400px){.kpi-grid{grid-template-columns:1fr;}}

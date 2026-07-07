@@ -1,130 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 | Page Not Found</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="pages.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Bay Not Found — Stackly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pages.css">
+
+    <style>
+      /* ============================================================
+         404 DOCK MODULE — new signature component
+         (move into pages.css once approved; scoped, uses existing tokens)
+         ============================================================ */
+      .dock-hero {
+        padding: 150px var(--gutter) 40px;
+        max-width: var(--container);
+        margin: 0 auto;
+      }
+      .dock-hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .dock-eyebrow-row{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        margin-bottom:18px;
+      }
+      .dock-hero h1 {
+        font-size: clamp(32px, 4.6vw, 52px);
+        line-height: 1.06;
+        margin-bottom: 16px;
+      }
+      .dock-hero p.dock-desc {
+        max-width: 480px;
+        font-size: 16px;
+        color: var(--slate);
+        margin-bottom: 28px;
+      }
+      .dock-actions{
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+      }
+
+      /* --- the dock door graphic panel --- */
+      .dock-panel {
+        position: relative;
+        background: var(--ink);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lift);
+        overflow: hidden;
+        aspect-ratio: 4 / 3.4;
+        display: flex;
+        align-items: flex-end;
+      }
+      .dock-panel-tag{
+        position:absolute;
+        top:18px; left:18px;
+        z-index:3;
+        display:flex;
+        align-items:center;
+        gap:8px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing:.08em;
+        text-transform:uppercase;
+        color:#fff;
+        background: rgba(255,255,255,0.08);
+        border:1px solid var(--line-dark);
+        padding:7px 12px;
+        border-radius: var(--radius-pill);
+      }
+      .dock-panel-tag i{
+        width:7px;height:7px;border-radius:50%;
+        background: var(--signal);
+        box-shadow: 0 0 0 0 rgba(255,106,43,.6);
+        animation: dockBlink 1.6s ease-in-out infinite;
+      }
+      @keyframes dockBlink{
+        0%,100%{ opacity:1; }
+        50%{ opacity:.25; }
+      }
+
+      .dock-frame{
+        position:relative;
+        width:100%;
+        height:100%;
+      }
+
+      /* concrete floor + back wall */
+      .dock-frame::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          radial-gradient(120% 90% at 50% 110%, rgba(255,106,43,0.10), transparent 60%),
+          repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 34px);
+      }
+
+      /* the rolled-up door + empty threshold */
+      .dock-door-shutter{
+        position:absolute;
+        top:0; left:8%; right:8%;
+        height:34%;
+        background: repeating-linear-gradient(180deg, var(--ink-soft) 0 8px, #0c1a26 8px 16px);
+        border-bottom: 4px solid var(--signal);
+        border-radius: 0 0 6px 6px;
+      }
+
+      .dock-hazard-strip{
+        position:absolute;
+        left:8%; right:8%;
+        top: 34%;
+        height:14px;
+        background: repeating-linear-gradient(45deg, var(--signal) 0 14px, var(--ink) 14px 28px);
+        opacity:.9;
+      }
+
+      .dock-void{
+        position:absolute;
+        left:8%; right:8%;
+        top: calc(34% + 14px);
+        bottom: 14%;
+        background: linear-gradient(180deg, #060d14, #0b1520);
+        border-left: 3px solid var(--ink-soft);
+        border-right: 3px solid var(--ink-soft);
+      }
+
+      .dock-void-plate{
+        position:absolute;
+        left:50%; top:50%;
+        transform:translate(-50%,-50%) rotate(-2deg);
+        text-align:center;
+        font-family: var(--font-mono);
+      }
+      .dock-void-plate .num{
+        font-family: var(--font-display);
+        font-weight:700;
+        font-size: clamp(48px, 7vw, 78px);
+        color:#fff;
+        line-height:1;
+      }
+      .dock-void-plate .sub{
+        margin-top:8px;
+        font-size:11px;
+        letter-spacing:.16em;
+        text-transform:uppercase;
+        color: var(--signal-dim);
+      }
+
+      .dock-floor-mark{
+        position:absolute;
+        left:8%; right:8%;
+        bottom: 14%;
+        height: 14%;
+        background: repeating-linear-gradient(90deg, transparent 0 26px, rgba(255,255,255,.10) 26px 30px);
+      }
+
+      /* hanging out-of-service tag */
+      .dock-swing-tag{
+        position:absolute;
+        top: 34%;
+        right: 16%;
+        transform-origin: top center;
+        animation: dockSwing 3.6s ease-in-out infinite;
+        z-index:2;
+      }
+      .dock-swing-tag .string{
+        width:1px;
+        height:16px;
+        background: rgba(255,255,255,.35);
+        margin:0 auto;
+      }
+      .dock-swing-tag .tag{
+        margin-top:0;
+        background: var(--rust);
+        color:#fff;
+        font-family: var(--font-mono);
+        font-size:9.5px;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        padding:6px 9px;
+        border-radius:4px;
+        white-space:nowrap;
+        box-shadow: 0 6px 14px rgba(0,0,0,.35);
+      }
+      @keyframes dockSwing{
+        0%,100%{ transform:rotate(-4deg); }
+        50%{ transform:rotate(4deg); }
+      }
+
+      /* --- manifest-style breakdown row (reuses existing manifest look) --- */
+      .dock-manifest{
+        margin-top:44px;
+      }
+
+      @media (prefers-reduced-motion: reduce){
+        .dock-panel-tag i,
+        .dock-swing-tag{ animation:none; }
+      }
+
+      @media (max-width: 912px){
+        .dock-hero{ padding-top:120px; }
+        .dock-hero-grid{ grid-template-columns: 1fr; }
+      }
+      @media (max-width: 560px){
+        .dock-swing-tag{ right:10%; }
+      }
+    </style>
 </head>
 <body class="page-shell">
-  <nav class="nav-bar">
-            <div class="logo-box">
-                <img src="./src/logo/Untitled design-compressed (1).webp" alt="">
-            </div>
-            <div class="nav-links ">
-                <a href="./home.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./service.html">Service</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
- 
-            </div>
-            <div class="login-btn">
-                <a href="./login.html">
-                    <Button title="Login to Tract Your order and History">Login</Button>
-                </a>
-            </div>
-        </nav>
-        <div class="mobile-nav">
-            <div class="mobile-menu">
-                 <a href="./home.html">Home</a>
-                <a href="./about.html">About</a>
-                <a href="./service.html">Service</a>
-                <a href="./blog.html">Blog</a>
-                <a href="./contact.html">Contact</a>
-            </div>
-            <div class="mobile-login-btn" id="mobile-login-btn">
-                <a href="./login.html">
-                    <Button title="Login to Tract Your order and History">Login</Button>
-                </a>
-            </div>
+
+<nav class="nav-bar">
+    <div class="logo-box">
+        <a href="./home.html">
+            <img src="./src/logo/Untitled design-compressed (1).webp" alt="">
+        </a>
+    </div>
+    <div class="nav-links ">
+        <a href="./home.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./service.html">Service</a>
+        <a href="./blog.html">Blog</a>
+        <a href="./contact.html">Contact</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="login-btn">
+        <a href="./login.html">
+            <Button title="Login to Tract Your order and History">Login</Button>
+        </a>
+    </div>
+</nav>
+<div class="mobile-nav">
+    <div class="mobile-menu">
+        <a href="./home.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./service.html">Service</a>
+        <a href="./blog.html">Blog</a>
+        <a href="./contact.html">Contact</a>
+    </div>
+    <div class="mobile-login-btn" id="mobile-login-btn">
+        <a href="./login.html">
+            <Button title="Login to Tract Your order and History">Login</Button>
+        </a>
+    </div>
+</div>
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+<main>
+  <section class="dock-hero">
+    <div class="dock-hero-grid">
+
+      <div data-reveal="left">
+        <div class="dock-eyebrow-row">
+          <span class="section-badge">Dock Exception</span>
         </div>
+        <h1>Bay 404 came back empty.</h1>
+        <p class="dock-desc">There's no page slotted at this address. It may have shipped out, been renamed, or never made it onto the rack. Let's get you back to a bay that's actually stocked.</p>
+        <div class="dock-actions">
+          <a href="home.html" class="inline-btn">
+            Back to Home
+          </a>
+          <a href="contact.html" class="inline-btn-dark">Tell us what broke</a>
+        </div>
+      </div>
 
-
-  <main>
-    <section class="page-hero">
-      <div class="page-hero-grid">
-        <div>
-          <div class="section-badge">404 Error</div>
-          <h1>The page you’re looking for has moved.</h1>
-          <p>This link may be outdated or the page is temporarily unavailable. Please return to the homepage or choose a live page from the navigation.</p>
-          <div class="page-hero-actions">
-            <a href="index.html" class="inline-btn">Back Home</a>
-            <a href="contact.html" class="inline-btn-dark">Contact Support</a>
+      <div class="dock-panel" data-reveal="right">
+        <span class="dock-panel-tag"><i></i> Dock 04 · Offline</span>
+        <div class="dock-frame">
+          <div class="dock-door-shutter"></div>
+          <div class="dock-hazard-strip"></div>
+          <div class="dock-void">
+            <div class="dock-void-plate">
+              <div class="num">404</div>
+              <div class="sub">Bay Vacant</div>
+            </div>
           </div>
-        </div>
-        <div class="page-hero-card" data-reveal="fade">
-          <img class="page-hero-image" src="./src/images/image_7-compressed.webp" alt="Missing page illustration" loading="lazy">
-          <div class="hero-badges">
-            <span><i class="fa-solid fa-compass"></i> Route unavailable</span>
-            <span><i class="fa-solid fa-location-dot"></i> Redirected safely</span>
-            <span><i class="fa-solid fa-magnifying-glass"></i> Still exploring</span>
+          <div class="dock-floor-mark"></div>
+          <div class="dock-swing-tag">
+            <div class="string"></div>
+            <div class="tag">Out of Service</div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="footer-block">
+    </div>
+
+   
+  </section>
+</main>
+
+<footer class="footer-block">
+
     <div class="footer-main-layout">
-      <div class="footer-brand-column" data-reveal="fade">
-        <div class="logo-lockup">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M5 19L19 5M19 5H9M19 5V15" stroke="#F2A93B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Stackly
+
+        <div class="footer-company">
+            <div class="logo-box">
+                <a href="./home.html">
+                    <img src="./src/logo/Untitled design-compressed (1).webp" alt="">
+                </a>
+            </div>
+            <p>
+                Stackly delivers intelligent logistics and supply chain
+                solutions that help businesses move products faster,
+                reduce operational costs, and improve customer satisfaction.
+            </p>
         </div>
-      </div>
-      <div class="footer-nav-column" data-reveal="fade">
-        <h4>Links</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="service.html">Services</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-column" data-reveal="fade">
-        <h4>Socials</h4>
-        <ul>
-          <li><a href="404.html">Facebook</a></li>
-          <li><a href="404.html">Linkedin</a></li>
-          <li><a href="404.html">X</a></li>
-          <li><a href="404.html">Instagram</a></li>
-        </ul>
-      </div>
-      <div class="footer-nav-column newsletter-wrapper" data-reveal="fade">
-        <h4>Subscribe Newsletter</h4>
-        <p>Sign up to our weekly newsletter to get the latest updates.</p>
+
+        <div class="footer-column">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="404.html">Careers</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>Solutions</h4>
+            <ul>
+                <li><a href="404.html">Freight Forwarding</a></li>
+                <li><a href="404.html">Warehousing</a></li>
+                <li><a href="404.html">Inventory Management</a></li>
+                <li><a href="404.html">Order Fulfillment</a></li>
+                <li><a href="404.html">Supply Chain</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h4>Resources</h4>
+            <ul>
+                <li><a href="404.html">Help Center</a></li>
+                <li><a href="404.html">Documentation</a></li>
+                <li><a href="404.html">Case Studies</a></li>
+                <li><a href="404.html">FAQs</a></li>
+                <li><a href="404.html">Support</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="newsletter-strip">
+        <div>
+            <h3>Subscribe to our Newsletter</h3>
+            <p>Stay updated with logistics trends and company news.</p>
+        </div>
         <div class="newsletter-field-box">
-          <input type="email" placeholder="Enter your email" required />
-          <button class="btn-news-submit" aria-label="Submit email address">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
+            <input type="email" placeholder="Enter email">
+            <button>Subscribe</button>
         </div>
-      </div>
     </div>
-    <div class="footer-legal-row">
-      <div class="legal-links">
-        <a href="404.html">Privacy Policies</a>
-        <a href="404.html">Terms of use</a>
-      </div>
-      <div>©2026 Stackly. All rights reserved.</div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Stackly Software. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="404.html">Privacy Policy</a>
+            <a href="404.html">Terms &amp; Conditions</a>
+            <a href="404.html">Cookies</a>
+        </div>
+        <div class="footer-social">
+            <a href="./404.html"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="./404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="./404.html"><i class="fa-brands fa-instagram"></i></a>
+            <a href="./404.html"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
     </div>
-  </footer>
-  <button class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top">
+
+</footer>
+
+<button class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top">
     <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-  </button>
-  <script src="script.js"></script>
+</button>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -69,15 +69,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const graphicAssetMapping = {
         "1": {
-            url: "https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&q=80&w=800",
+            url: "./src/images/image_7-compressed.webp",
             tag: "DUMMY_IMAGE_1"
         },
         "2": {
-            url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
+            url: "./src/images/image_8-compressed.webp",
             tag: "DUMMY_IMAGE_2"
         },
         "3": {
-            url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800",
+            url: "./src/images/image_9-compressed.webp",
             tag: "DUMMY_IMAGE_3"
         }
     };
