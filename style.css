@@ -322,7 +322,7 @@ svg {
 }
  
  
-@media (max-width:768px) {
+@media (max-width:760px) {
     nav .nav-links,.login-btn{
         display: none;
     }
@@ -2196,6 +2196,7 @@ svg {
     display:grid;
     grid-template-columns:2fr 1fr 1fr 1fr;
     gap:50px;
+    margin-bottom: 5px;
 }
 
 .footer-company p{
@@ -2248,7 +2249,7 @@ svg {
     padding: 35px 40px;
     border-radius: 18px;
 
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     gap: 40px;
