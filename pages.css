@@ -20,7 +20,7 @@
 }
 
 .sk-section{
-  padding:84px 8vw;
+  padding:64px 6vw;
   background:var(--sk-paper);
 }
 .sk-section--dark{
@@ -37,7 +37,7 @@
   text-transform:uppercase;
   color:var(--sk-flare);
   margin-bottom:18px;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 .sk-eyebrow::before{
   content:"";
@@ -66,7 +66,6 @@
 
 /* ---------- ABOUT: manifest strip ---------- */
 .about-manifest{
-  padding:0 8vw 96px;
   background:var(--sk-paper);
 }
 .manifest-card{

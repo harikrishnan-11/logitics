@@ -3633,7 +3633,6 @@ svg {
 
 /* ---------- ABOUT: manifest strip ---------- */
 .about-manifest {
-    padding: 0 var(--gutter) 96px;
     background: var(--paper);
 }
 
