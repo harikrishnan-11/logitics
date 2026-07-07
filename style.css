@@ -2935,7 +2935,7 @@ svg {
 }
 
 .cta-marquee-track {
-    margin-top: 150px;
+    margin-top: 180px;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -2963,7 +2963,7 @@ svg {
 
 .cta-banner-content h2 {
     color: var(--ink);
-    font-size: clamp(30px, 4.2vw, 54px);
+    font-size: clamp(20px, 4.2vw, 34px);
     max-width: 680px;
     line-height: 1.1;
 }
