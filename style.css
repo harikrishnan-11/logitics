@@ -3707,12 +3707,14 @@ svg {
 }
 
 .route-line-wrap::before {
-    content: "";
+   content: "";
     position: absolute;
-    left: 15px;
-    top: 8px;
-    bottom: 8px;
-    width: 0;
+    top: 16px;
+    left: 8%;
+    right: 8%;
+    border-top: 2px dashed var(--sk-line);
+    z-index: 0;
+    
 }
 
 .route-stop {
