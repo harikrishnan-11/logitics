@@ -322,7 +322,7 @@ svg {
 }
  
  
-@media (max-width:760px) {
+@media (max-width:770px) {
     nav .nav-links,.login-btn{
         display: none;
     }
